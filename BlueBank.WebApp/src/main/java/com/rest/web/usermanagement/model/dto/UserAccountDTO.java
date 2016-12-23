@@ -1,51 +1,42 @@
 package com.rest.web.usermanagement.model.dto;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.rest.web.usermanagement.model.entity.UserAccount;
 
 /**
- * DTO como os dados cadastrais do usuário.
  * 
  * @author emersonmuraro
  *
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class UserAccountDTO implements Serializable{
+public class UserAccountDTO extends AccountDTO{
+
+	private static final long serialVersionUID = 3011951571241743003L;
 	
-	private static final long serialVersionUID = 3864727777606894864L;
-	
-	private Integer agency;
-	
-	private Integer account;
-	
-	private Float value;
+	private BigDecimal value;
 
-	public Integer getAgency() {
-		return agency;
-	}
-
-	public void setAgency(Integer agency) {
-		this.agency = agency;
-	}
-
-	public Integer getAccount() {
-		return account;
-	}
-
-	public void setAccount(Integer account) {
-		this.account = account;
-	}
-
-	public Float getValue() {
+	public BigDecimal getValue() {
 		return value;
 	}
 
-	public void setValue(Float value) {
+	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-
+	
+	public static UserAccountDTO convertUserAccountToUserAccountDTO(UserAccount userAccount){
+		UserAccountDTO result = new UserAccountDTO();
+		result.setAccount(userAccount.getAccount());
+		result.setAgency(userAccount.getAgency());
+		result.setValue(userAccount.getValue());
+		
+		return result;
+	}
+	
+	public UserAccount toUserAccount(){
+		UserAccount userAccount = new UserAccount();
+		userAccount.setAgency(this.getAgency());
+		userAccount.setAccount(this.getAccount());
+		userAccount.setValue(this.value);
+		return userAccount;
+	}
 }

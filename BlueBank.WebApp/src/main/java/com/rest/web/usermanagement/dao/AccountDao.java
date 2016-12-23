@@ -4,15 +4,15 @@ import java.util.List;
 
 import com.rest.web.usermanagement.model.entity.UserAccount;
 
-public interface UserDao {
+public interface AccountDao {
 	/**
 	 * Recupera o agencia e conta cadastrada
 	 * @param email
 	 * @return
 	 */
 	UserAccount findByAccount(Integer agency, Integer account);
-	void saveUser(UserAccount user);
-	void deleteUser(UserAccount user);
+	void saveAccount(UserAccount userAccount);
+	void deleteAccount(UserAccount userAccount);
 	
 	/**
 	 * Lista todos as agencias e contas cadastradas.
@@ -26,5 +26,5 @@ public interface UserDao {
 	 * @return
 	 */
 	UserAccount findById(String id);
-	void updateUser(UserAccount user);
+	void updateAccount(UserAccount userAccount);
 }

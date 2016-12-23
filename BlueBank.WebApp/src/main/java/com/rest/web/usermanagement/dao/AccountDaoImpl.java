@@ -8,21 +8,21 @@ import org.springframework.stereotype.Repository;
 import com.rest.web.usermanagement.model.entity.UserAccount;
 
 @Repository("userDao")
-public class UserDaoImpl extends AbstractDao implements UserDao{
+public class AccountDaoImpl extends AbstractDao implements AccountDao{
 
 
 	@Override
-	public void saveUser(UserAccount user) {
+	public void saveAccount(UserAccount user) {
 		persist(user);
 	}
 
 	@Override
-	public void deleteUser(UserAccount user) {
+	public void deleteAccount(UserAccount user) {
 		delete(user);
 	}
 	
 	@Override
-	public void updateUser(UserAccount user){
+	public void updateAccount(UserAccount user){
 		merge(user);
 	}
 

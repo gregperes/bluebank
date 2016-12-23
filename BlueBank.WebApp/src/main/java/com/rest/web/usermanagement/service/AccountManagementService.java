@@ -1,13 +1,14 @@
 package com.rest.web.usermanagement.service;
 
-import java.util.List;
-
 import com.rest.web.usermanagement.exception.BusinessException;
+import com.rest.web.usermanagement.model.dto.AccountDTO;
+import com.rest.web.usermanagement.model.dto.TransferTransactionDTO;
 import com.rest.web.usermanagement.model.dto.UserAccountDTO;
 
 public interface AccountManagementService {
-	void saveUser(UserAccountDTO accountDTO)throws BusinessException;
-	void deleteUser(UserAccountDTO accountDTO);
-	List<UserAccountDTO> listAllAccounts();
-	UserAccountDTO findById(String id);
+
+	UserAccountDTO findByAccount(AccountDTO accountDTO);
+	void registerAccount(UserAccountDTO userAccountDTO);
+	void transferAccountValue(TransferTransactionDTO transferDTO) throws BusinessException;
+	
 }

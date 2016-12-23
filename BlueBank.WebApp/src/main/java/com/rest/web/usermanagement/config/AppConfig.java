@@ -18,7 +18,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.rest.web.usermanagement")
-@PropertySource(value = {"classpath:configuration.properties"})
 public class AppConfig{
 	
 	/*
