@@ -1,0 +1,31 @@
+ [ {
+      "agencia" : "0001",
+      "numero" : "000001",
+      "saldo" : 100.00
+   },
+   {
+      "agencia" : "0002",
+      "numero" : "000002",
+       "saldo" : 200.00
+   },
+   {
+      "agencia" : "0003",
+      "numero" : "000003",
+      "saldo" : 300.00
+   },
+   {
+      "agencia" : "0004",
+      "numero" : "000004",
+      "saldo" : 400.00
+   },
+   {
+      "agencia" : "0005",
+      "numero" : "000005",
+      "saldo" : 500.00
+   },
+   {
+      "agencia" : "3278",
+      "numero" : "124200",
+      "saldo" : 100.00
+   }
+]
