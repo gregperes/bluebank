@@ -104,3 +104,15 @@ footer{
 		text-align: left !important;
 	}
 }
+@media screen and (max-width: 500px) {
+	header .logo {
+	    margin: 15px 0 0 30%;
+	}
+	header .conta {
+	    margin: 0 auto;
+	    float: left;
+	    margin-top: -15px;
+	    margin-bottom:20px;
+	    width: 98%
+	}
+}
