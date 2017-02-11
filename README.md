@@ -1,31 +1,37 @@
-# Blue Bank
-Blue Bank é um projeto para testar seus conhecimentos de backend e frontend.
+# Blue Bank - Estamos contratando!
 
-Você irá criar uma aplicação web para simular a transferência bancária entre contas cadastradas.
-Esse teste consiste em avaliar seus conhecimentos como fullstack developer.
 
-Você deverá criar um banco de dadaos contendo uma tabela de conta, a tabela deverá conter os seguintes atributos: 
-- ID
-- CPF do Cliente
-- Numero da Agencia 
-- Numero da Conta
-	
-O banco de dados deve ser populado com algumas contas.
+**Blue Bank** é uma instituição financeira fictícia cujas demandas de desenvolvimento de software têm aumentado muito nos últimos meses. Tentando manter-se sempre atualizada, busca novos desenvolvedores de software que sejam capazes de solucionar problemas de forma eficaz e elegante.
 
-## Requisitos Funcionais
+Como candidato, seu objetivo é desenvolver uma aplicação que seja capaz de demonstrar seus conhecimentos em desenvolvimento frontend e backend, ou seja, provar ser um legítimo desenvolvedor Fullstack.
 
-1. A tela deverá os seguintes campos: Agencia/Numero da conta origem e destino e valor
-2. Verificar a existencia das contas informadas
-3. Verificar a disponibilidade do saldo da conta de origem, o valor a ser debitado deve ser maior ou igual ao saldo disponível na conta.
+Para isso será necessário criar uma aplicação que possibilite a transferência de fundos entre contas de dois correntistas.
 
-## Requisitos Técnicos
+## Informações importantes sobre o negócio
+Um correntista é identificado pelo seu id, CPF, número da conta corrente e código da agência.
 
-1. Utilizar backend em Java ou NodeJS
-2. Aplicar conceitos de orientação a objetos
-3. Controlar transação nas operações de saque e deposito
+As transferências devem ter controle transacional para evitar débitos e créditos inválidos.
 
-## Diferenciais
+A existência da conta de destino deve ser validada, assim como a existência de fundos suficientes para o valor a ser transferido.
 
-1. Aplicar conceitos de SOLID
-2. Testes unitários
-3. Utilizar bibliotecas de frontend (JQuery, Bootstrap, Angular, ModuleJS, etc)
+## Requisitos técnicos
+- Interface web.
+- Backend Java EE ou NodeJs.
+- Utilizar OOP.
+- Banco de dados relacional com ORM (Lembre-se que a legislação obriga os bancos a manter dados históricos por anos).
+- Instruções para deploy e execução.
+- Pequeno memorando com justificativa de decisões técnicas.
+
+## Como destacar-se?
+- Aplicar SOLID.
+- Escrever testes unitários com boa cobertura.
+- Arquitetar com SPA + API.
+- Fazer o deploy da aplicação no seu ambiente de nuvem preferido ([IBM Bluemix](https://console.ng.bluemix.net/), AWS, Openshift, Heroku).
+
+
+## Frameworks são bem vindos!
+Angular, jQuery, Bootstrap, Material, ModuleJs, Sequelize, Spring, Hibernate.
+
+## Como enviar o código para anáise?
+O desenvolvedor deve criar um projeto no seu Git repo preferido (GitHub, GitBucket, etc). Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
+
