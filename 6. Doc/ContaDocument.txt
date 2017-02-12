@@ -1,0 +1,3 @@
+1. Modelo de tamanho de campos (Agencia e Conta) foram retirados com base no padrão apresentado em http://www.credlink.net.br/modulo_cadastro/comunicado/arquivos/1453.pdf
+
+
