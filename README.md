@@ -33,5 +33,5 @@ A existência da conta de destino deve ser validada, assim como a existência de
 Angular, jQuery, Bootstrap, Material, ModuleJs, Sequelize, Spring, Hibernate.
 
 ## Como enviar o código para análise?
-O desenvolvedor deve criar um projeto no seu Git repo preferido (GitHub, GitBucket, etc). Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
+O desenvolvedor deve criar um projeto no seu Git repo preferido (GitHub, BitBucket, etc). Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
 
