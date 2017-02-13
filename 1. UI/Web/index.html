@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html ng-app="contaApp">
+<head>
+   <title>BlueBank</title>   
+   <script src="./js/lib/angular.min.js" type="text/javascript"></script>
+   <script src="./js/lib/jquery-3.1.1.min.js" type="text/javascript"></script>
+   <script src="./js/lib/jquery.mask.min.js" type="text/javascript"></script>
+   <script src="./js/lib/bootstrap.min.js" type="text/javascript"></script>
+
+   <link rel="stylesheet" type="text/css" href="./css/bootstrap.min.css">
+   <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+
+   <script>
+    angular.module("contaApp",[]);
+   </script>
+
+   <script src="./js/mask/JMask.js" type="text/javascript"></script>
+   <script src="./js/controllers/TransferirCtrl.js" type="text/javascript"></script>
+   <script src="./js/controllers/ExtratoCtrl.js" type="text/javascript"></script>
+</head>
+<body>
+ 
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                       BlueBank
+                    </a>
+                </li>
+                <li>
+                    <a href="#" data-target="#mdlExtrato" data-toggle="modal">Extrato</a>
+                </li>
+                <li>
+                    <a href="#" data-target="#mdlTransferir" data-toggle="modal">Transferir</a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Olá,</h1>
+                        <p>Seja bem vindo ao BlueBank.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+  <div id="mdlTransferir" ng-controller="TransferirCtrl" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Transferência</h4>
+        </div>
+        <form name="transferenciaForm">
+         <div class="modal-body">
+          <div class="alert alert-warning">
+            <strong>Atenção!</strong> Ao clicar em confirmar seu dinheiro será automaticamente transferido.
+          </div>
+              <div id="boxMain" class="row">
+                  <label>Minha conta</label>
+                  <span class="division"></span>
+                  <div class="col-md-12 alert alert-danger" ng-hide="transferenciaForm.$pristine || transferenciaForm.mAgencia.$valid && transferenciaForm.mConta.$valid && statusMinhaConta">
+                    <strong>Houve um problema!</strong> A Agência ou Nº de conta estão incorretos.
+                  </div>
+                  <div class="form-group col-md-6">
+                   <label>Agência:</label>
+                   <input type="text" class="form-control" name="mAgencia" maxlength="4" ng-model="Transferencia.mAgencia" placeholder="Agencia" ng-required="true"/>
+                  </div>
+                  <div class="form-group col-md-6">
+                   <label>Nº de Conta</label>
+                   <input type="text" class="form-control" name="mConta" maxlength="11" ng-model="Transferencia.mConta" placeholder="Conta" ng-required="true"/>
+                  </div>
+
+                  <label>Remetente</label>
+                  <span class="division"></span>
+
+                  <div class="col-md-12 alert alert-danger" ng-hide="transferenciaForm.$pristine || transferenciaForm.rAgencia.$valid && transferenciaForm.rConta.$valid && statusContaTransferencia">
+                    <strong>Houve um problema!</strong> A Agência ou Nº de conta estão incorretos.
+                  </div>
+
+                  <div class="form-group col-md-6">
+                   <label>Agência:</label>
+                   <input type="text" class="form-control" name="rAgencia" maxlength="4" ng-model="Transferencia.rAgencia" placeholder="Agencia" ng-required="true"/>
+                  </div>
+                  <div class="form-group col-md-6">
+                   <label>Nº de Conta</label>
+                   <input type="text" class="form-control" name="rConta" maxlength="11" ng-model="Transferencia.rConta" placeholder="Conta" ng-required="true"/>
+                 </div>
+
+                 <div class="form-group pull-right">     
+                   <label>Valor (R$)</label>
+                   <input type="text" class="form-control mskValor text-right" name="Valor" ng-model="Transferencia.Valor" ng-required="true"/>
+                 </div>
+              </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-default">Limpar</button>
+          <button type="button" class="btn btn-success" ng-disabled="transferenciaForm.$invalid" ng-click="transferirConta(Transferencia)" >Confirmar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        </div>
+       </form>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div id="mdlExtrato" ng-controller="ExtratoCtrl" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Extrato</h4>
+        </div>
+        <div class="modal-body">
+        <form name="transferenciaForm">
+             <label>Minha conta</label>
+             <span class="division"></span>
+             <div class="form-group col-md-6">
+              <label>Agência:</label>
+                   <input type="text" class="form-control" name="Agencia" maxlength="4" ng-model="Extrato.Agencia" placeholder="Agencia" ng-required="true"/>
+             </div>
+             <div class="form-group col-md-6">
+              <label>Nº de Conta</label>
+              <input type="text" class="form-control" name="Conta" maxlength="11" ng-model="Extrato.Conta" placeholder="Conta" ng-required="true"/>
+             </div>
+             <div class="col-md-12">
+              <label>Valor (R$)</label>
+              <input type="text" class="form-control" ng-value="Saldo" ng-model="Extrato.Valor" readonly="readonly" />
+             </div>
+             <br/>
+             <span class="division"></span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" ng-click="consultarSaldo(Extrato)">Consultar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="mdlAlerta" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Aviso!</h4>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,1 @@
+Para importar o banco de dados é necessario criar um DB chamado BlueBank e uma Collection chamada Conta
