@@ -32,6 +32,6 @@ A existência da conta de destino deve ser validada, assim como a existência de
 ## Frameworks são bem vindos!
 Angular, jQuery, Bootstrap, Material, ModuleJs, Sequelize, Spring, Hibernate.
 
-## Como enviar o código para anáise?
+## Como enviar o código para análise?
 O desenvolvedor deve criar um projeto no seu Git repo preferido (GitHub, GitBucket, etc). Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
 
