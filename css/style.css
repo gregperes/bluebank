@@ -1,0 +1,118 @@
+/*
+ *
+ * CSS
+ *
+ * @Autor
+
+ * - Victor Brosso Alvares
+ *
+ */
+ body{
+ 	overflow-x: hidden;
+ }
+header .logo{
+	background: url('../img/logo.png') no-repeat;
+	width: 195px;
+	height: 108px;
+	float: left;
+	text-indent: -9999px;
+	margin-top: 5px;
+}
+header .conta{
+	margin-top: 20px;
+	padding: 5px;
+	background-color: #f5f5f5;
+    border: 1px solid #e8e8e8;
+}
+header .conta .numconta{
+	padding-left: 10px;
+}
+header .conta p{
+	padding: 0 0 0 0;
+	margin: 0 0 0 0;
+}
+header .conta p a{
+	text-decoration: underline;
+	padding-right: 15px;
+	font-size: 12px;
+}
+.container h2{
+	margin-top: 60px;
+	font-size: 22px;
+}
+.container .form-group label{
+	margin-top: 5px;
+}
+.container .form-group input{
+	width: 50%;
+	margin-top: 5px;
+}
+.agencia-errorbox{
+	color: red;
+    font-size: 11px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.conta-errorbox{
+	color: red;
+    font-size: 11px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.valor-errorbox{
+	color: red;
+	font-size: 11px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+.valor-sucessbox{
+	color: green;
+	font-size: 12px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+.checkConta{
+	float: right;
+	display: none;
+}
+.checkAgencia{
+	float: right;
+	display: none;
+}
+input#valor:focus { 
+    border: 1px solid red;
+}
+footer{
+	background-color: #f5f5f5;
+	padding:8px 5px;
+	margin-top: 40px;
+}
+
+@media screen and (max-width: 1215px) {
+	header .conta{
+	    width: 223px;
+	    float: right;
+	}
+	header .logo{
+	    width: 123px;
+	    background-size: 100%;
+	    margin-top: 22px;
+	}
+	.form-horizontal .control-label{
+		text-align: left !important;
+	}
+}
+@media screen and (max-width: 500px) {
+	header .logo {
+	    margin: 15px 0 0 30%;
+	}
+	header .conta {
+	    margin: 0 auto;
+	    float: left;
+	    margin-top: -15px;
+	    margin-bottom:20px;
+	    width: 98%
+	}
+}

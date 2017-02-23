@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8"/>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
+	<title>Blue Bank</title>
+	<link href="css/style.css" rel="stylesheet"/>
+	<link href="css/bootstrap.css" rel="stylesheet"/>
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.maskMoney.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/funcoes.js"></script>
+</head>
+<body>
+
+<header>
+	    <div class="container">
+			<div class="logo col-md-4">Blue Blank</div>
+			
+			<!--LOGIN FEITO NO BACK-END-->
+			<div class="conta col-md-offset-8">
+				<p>Bem vindo, <span id="usuario">Victor</span></p>
+				<p><strong>Agência:</strong> <span id="agencia"> 3278 </span> <strong class="numconta">Conta</strong> <span id="conta"> 124200</span></p>
+				<p><a href="#">Troca de conta</a> <a href="#"> Sair</a></p>
+			</div>
+		</div>
+</header>
+
+	    <div class="container">
+	    	 <div class="row">
+        <div class="span12">
+            <ul class="nav nav-tabs" id="myTabs">
+              <li><a id="tab-1" href="#one" data-toggle="tab">HOME</a></li>
+              <li><a href="#two" id="tab-2" data-toggle="tab">EXTRATO</a></li>
+              <li class="active"><a href="#three" id="tab-3" data-toggle="tab">TRANSFERÊNCIA</a></li>
+            </ul>
+        </div>
+    </div>
+    <div ng-controller="CarrinhoController">
+		<form action="javascript:return false;" class="form-horizontal ws-validate" id="formEnvia">
+	    	<h2>Conta de origem</h2>
+	    	<div class="form-group">
+		        <label for="inputAgencia" class="col-xs-6 col-sm-4 col-md-2 col-lg-2  control-label">Sua gencia</label>
+		        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-10">
+		            <input type="number" class="form-control" id="agenciaOrigem" placeholder="" maxlength="4" readonly />
+		        </div>
+
+		        <label for="inputConta" class="col-xs-6 col-sm-4 col-md-2 col-lg-2 control-label">Sua conta</label>
+		        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-10">
+		            <input type="number" class="form-control" id="contaOrigem" placeholder="" maxlength="6" readonly />
+		        </div>
+	    	</div>
+
+	    	<h2>Conta de destino</h2>
+	    	<div class="form-group">
+		        <label for="inputAgencia" class="col-xs-6 col-sm-4 col-md-2 col-lg-2 control-label">Agencia* <img src="img/ok.png" width="20" height="20" class="checkAgencia"></label>
+		        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-10">
+		            <input type="number" class="form-control" id="agenciaDestino" placeholder="Apenas numeros" required />
+		            <div class="agencia-errorbox" hidden=""></div>
+		        </div>
+
+		        <label for="inputConta" class="col-xs-6 col-sm-4 col-md-2  col-lg-2 control-label">Conta* <img src="img/ok.png" width="20" height="20" class="checkConta"></label>
+		        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-10">
+		            <input type="number" class="form-control" id="contaDestino" placeholder="Apenas numeros" required/>
+		            <div class="conta-errorbox" hidden=""></div>
+		        </div>
+	    	</div>
+	    
+	    	<h2>Valor a ser transferido</h2>
+	    	<div class="form-group">
+	    		<label for="inputAgencia" class="col-sm-2 control-label">Valor R$*</label>
+		        <div class="col-sm-10">
+		            <input type="text" class="form-control" id="valor" placeholder="" required />
+		            <div class="valor-errorbox" hidden=""></div>
+		            <div class="valor-sucessbox" hidden=""></div>
+		        </div>
+	    	</div>
+
+		    <div class="form-group">
+		        <div class="col-md-offset-6 col-xs-12">
+		            <button id="transferir" class="btn btn-primary" id="enviaForm">Transferir</button>
+		        </div>
+		    </div>
+		</form>
+	</div>
+</div>
+
+<footer>
+		<div class="container">
+			<p>© 2016 BLUE BANK CNPJ: 00.000.000/0001-91 Telefone SAC: 11- 0000-0000 | Segunda a Sexta-feira, das 09:00hs ás 18:00hs</p>
+		</div>
+</body>
+</html>
