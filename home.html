@@ -1,0 +1,26 @@
+<div ng-controller="homeController">
+  <md-card>
+  <h1 layout="row" layout-align="center">BlueBank - IBM</h1>
+    <md-input-container>
+      <label>ID</label>
+      <input ng-model="user.id" type="text">
+    </md-input-container>
+    <divider></divider>
+    <md-input-container>
+      <label>CPF</label>
+      <input ng-model="user.cpf" type="number">
+    </md-input-container>
+    <md-input-container>
+      <label>Conta</label>
+      <input ng-model="user.conta" type="number">
+    </md-input-container>
+    <md-input-container>
+      <label>Agência</label>
+      <input ng-model="user.agencia" type="number">
+    </md-input-container>
+    <md-button ng-click="validaAcesso(user)">Acessar</md-burron>
+  </md-card>
+</div>
+
+
+
