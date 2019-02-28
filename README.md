@@ -16,7 +16,7 @@ A existência da conta de destino deve ser validada, assim como a existência de
 
 ## Requisitos técnicos
 - Interface web.
-- Backend Spring Boot ou NodeJS.
+- Backend .NET Core, Spring Boot, Ruby, Python, PHP ou outra de sua preferência. Adoramos novas tecnologias :)
 - Utilizar OOP.
 - Banco de dados relacional com ORM (Lembre-se que a legislação obriga os bancos a manter dados históricos por anos).
 - Instruções para deploy e execução.
