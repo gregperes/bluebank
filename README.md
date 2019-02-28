@@ -15,23 +15,24 @@ As transferências devem ter controle transacional para evitar débitos e crédi
 A existência da conta de destino deve ser validada, assim como a existência de fundos suficientes para o valor a ser transferido.
 
 ## Requisitos técnicos
-- Interface web.
-- Backend .NET Core, Spring Boot, Ruby, Python, PHP ou outra de sua preferência. Adoramos novas tecnologias :)
-- Utilizar OOP.
-- Banco de dados relacional com ORM (Lembre-se que a legislação obriga os bancos a manter dados históricos por anos).
-- Instruções para deploy e execução.
+- Interface web ou mobile;
+- Backend .NET Core, Spring Boot, Ruby, Python, PHP ou outra de sua preferência. Adoramos novas tecnologias!;
+- Utilizar OOP;
+- Banco de dados relacional com ORM (Lembre-se que a legislação obriga os bancos a manter dados históricos por anos);
+- Instruções para deploy e execução;
 - Pequeno memorando com justificativa de decisões técnicas.
 
 ## Como destacar-se?
-- Aplicar SOLID.
-- Escrever testes unitários com boa cobertura.
-- Arquitetar com SPA + API.
+- Aplicar SOLID;
+- Escrever testes unitários com boa cobertura;
+- Arquitetar com SPA + API;
 - Fazer o deploy da aplicação no seu ambiente de nuvem preferido ([IBM Bluemix](https://console.ng.bluemix.net/), AWS, Openshift, Heroku).
 
 
 ## Frameworks são bem vindos!
-Angular, jQuery, Bootstrap, Material, ModuleJs, Sequelize, Spring, Hibernate.
+Angular, jQuery, Bootstrap, Material, ModuleJS, Sequelize, Spring, Hibernate.
 
 ## Como enviar o código para análise?
-O desenvolvedor deve criar um projeto no seu Git repo preferido (GitHub, BitBucket, etc). Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
-
+Como se candidatar?
+Efetue um fork do projeto e envie um pedido de pull request.
+Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
