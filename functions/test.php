@@ -1,0 +1,3 @@
+<?php
+
+$classTest = new Test();
