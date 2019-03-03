@@ -21,7 +21,7 @@ spl_autoload_register( function ($className){
 
 // Carrega todos os arquivos da pasta functions
 // Isso permite separar o código por arquivo dando maior legibilidade
-$pasta = get_template_directory() . "/functions/";
+$pasta = get_template_directory().DIRECTORY_SEPARATOR."functions".DIRECTORY_SEPARATOR;
 $arquivos = glob($pasta."*.php"); 
 foreach($arquivos as $phpFile){
    require_once("$phpFile");
