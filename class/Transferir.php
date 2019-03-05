@@ -43,50 +43,57 @@ class Transferir extends Transacao
 		$this->userDest = get_user_by('id', $id);
     }
     public function test(){ // Será removido em produção
-    	$this->validaTodosDados();
 
+        $this->bloqueioTemporario();
         echo $this->html;
+
+        var_dump($this->userOrig->bloqueio != 1 );
     }
     private function bloqueioTemporario(){ // executar bloqueio nas duas contas
 
-    	$this->tokenAutorizacao = wp_hash('***Valor Aleatório*** Paderia ser qualer coisa');
+    	$this->tokenAutorizacao = uniqid();// Gera um id para a transferência
 
     	// Verifica se a conta de origem está diponível para fazer alterações
-    	if ( $this->userOrig !== 0 ){
+    	if ( $this->userOrig->bloqueio != 1 ){
 
     		wp_update_user( array(
-    			// Se tiver diponível muda o status para zero e define o token como Id da transação
-    			'ID' => $this->userOrig->ID, 'bloqueio' => 0,
+    			// Se tiver diponível muda o status para 1 (um) e define o token como Id da transação
+    			'ID' => $this->userOrig->ID, 'bloqueio' => 1,
     			'ID' => $this->userOrig->ID, 'token_autorizacao' => $this->tokenAutorizacao
     		));
 
-    		$this->bloqueioContas = true;
+				// Verifica se a conta de destino está disponível para fazer auterações
+		    	if ( $this->userDest->bloqueio != 1 ){
+		    		
+		    		wp_update_user( array(
+
+		    			// Se tiver diponível muda o status para 1 (um) e define o token como Id da transação
+		    			'ID' => $this->userDest->ID, 'bloqueio' => 1,
+		    			'ID' => $this->userDest->ID, 'token_autorizacao' => $this->tokenAutorizacao
+
+		    		));
+
+		    		// Bloqueia a conta para realizar a transação
+		    		$this->contaLiberada = true;
+
+		    	}
+		    	else{
+		    		// envia mensagem informando que a conta está ocupada
+		    		$this->desbloquear();
+		    		// envia mensagem informando para tentar novamente
+    				return $this->html = 'Ocorreu um erro. Tente mais tarde. Destino';
+
+		    	}
+    		
 
     	}
     	else{ 
-    		// envia mensagem informando que a conta está ocupada
-    		return $this->contaLiberada = false;
+    		// envia mensagem informando para tentar novamente
+    		return $this->html = 'Ocorreu um erro. Tente mais tarde. Origem';
 
     	}
 
-    	// Verifica se a conta de destino está disponível para fazer auterações
-    	if ( $this->userDest !== 0 ){
-    		
-    		wp_update_user( array(
-
-    			// Se tiver diponível muda o status para zero e define o token como Id da transação
-    			'ID' => $this->userDest->ID, 'bloqueio' => 0,
-    			'ID' => $this->userDest->ID, 'token_autorizacao' => $this->tokenAutorizacao
-
-    		));
-
-    	}
-    	else{
-    		// envia mensagem informando que a conta está ocupada
-    		$this->desbloquear();
-    		return $this->contaLiberada = false;
-
-    	}
+    	
 
     }
 
