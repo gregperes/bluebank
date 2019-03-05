@@ -119,8 +119,8 @@ class Transferir extends Transacao
     	$this->validarId();
     	$this->validarCPF();
     	$this->validarConta();
-    	$this->validarConta();
     	$this->validarAgencia();
+    	$this->validarValor();
 
     	if ($this->statusId && $this->statusCPF && $this->statusConta && $this->statusAgencia && $this->statusValor){
 
