@@ -21,6 +21,11 @@ class Transferir extends Transacao
 	// Somente se todos forem verdadeiro é realizada a tranfência
 	// stastu fica falso por default, simbolicamente trancado.
 	private $dadosValidados = false;
+	private $statusId = false;
+	private $statusCPF = false;
+	private $statusConta = false;
+	private $statusAgencia = false;
+	private $statusValor = false;
 
 	// Armazena o HTML que será respondido para o front-end
 	public $html;
@@ -38,7 +43,9 @@ class Transferir extends Transacao
 		$this->userDest = get_user_by('id', $id);
     }
     public function test(){ // Será removido em produção
-        var_dump($this->userDest->user_email );
+    	$this->validaTodosDados();
+
+        echo $this->html;
     }
     private function bloqueioTemporario(){ // executar bloqueio nas duas contas
 
@@ -108,32 +115,70 @@ class Transferir extends Transacao
     }
 
     private function validaTodosDados(){
-    	$this->validarCPF();
+
     	$this->validarId();
+    	$this->validarCPF();
     	$this->validarConta();
     	$this->validarConta();
     	$this->validarAgencia();
+
+    	if ($this->statusId && $this->statusCPF && $this->statusConta && $this->statusAgencia && $this->statusValor){
+
+    		return $this->dadosValidados = true;
+
+    	} 
+
     }
 
-    private function validarCPF(){
-    	// valida CPF
-    	return $this->dadosValidados = true;
-    }
+
     private function validarId(){
     	// valida Id
-    	return $this->dadosValidados = true;
+    	// Se o retorno for booleano, o objeto não foi definido
+    	if( $this->userDest == true ) {
+    		return $this->statusId = true;
+    	}
+    	else{
+    		$this->dadosValidados = false;
+    		return $this->html .= '<p>O id '.$this->id.' não existe.</p>';
+    	}
+
+    }
+    private function validarCPF(){
+		// valida CPF
+		if($this->userDest->CPF == $this->CPF){
+			return $this->statusCPF = true;
+		}
+		else{
+
+			return $this->html .= '<p>O CPF '.$this->CPF.' está incorreto.</p>';
+		}
     }
     private function validarConta(){
     	// valida Conta
-    	return $this->dadosValidados = true;
+    	if($this->userDest->conta == $this->conta){
+			return $this->statusConta = true;
+		}
+		else{
+			return $this->html .= '<p>A Conta '.$this->conta.' está incorreta.</p>';
+		}
     }
     private function validarAgencia(){
     	// valida Agencia
-    	return $this->dadosValidados = true;
+    	if($this->userDest->agencia == $this->agencia){
+			return $this->statusAgencia = true;
+		}
+		else{
+			return $this->html .= '<p>A Agência '.$this->agencia.' está incorreta.</p>';
+		}
     }
     private function validarValor(){
     	// valida Valor: Se tem saldo suficiente
-    	return $this->dadosValidados = true;
+    	if($this->userOrig->saldo >= $this->valor){
+			return $this->statusValor = true;
+		}
+		else{
+			return $this->html .= '<p>Seu saldo é insuficiente para transferiri este valor. Saldo: '.$this->saldo.'</p>';
+		}
     }
 
     private function transfereciaAutorizada(){
