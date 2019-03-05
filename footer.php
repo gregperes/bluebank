@@ -40,7 +40,7 @@ https://codex.wordpress.org/Function_Reference/get_footer
         };
         // Send a POST to transferir function that load inside functions.php  file
         // Envia um POST na função transferir que carraga no arquivo functions.php
-        xhttp.open("POST", "/bluebank/wp-admin/admin-ajax.php?action=transferir", true);
+        xhttp.open("POST", "/wp-admin/admin-ajax.php?action=transferir", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("id=3&CPF=testCPF&conta=123&agencia=555&valor=100");
     }
