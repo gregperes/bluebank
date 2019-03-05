@@ -14,7 +14,15 @@ function transferir(){
 	$conta    = $dadosTransferencia['conta'];
 	$valor    = $dadosTransferencia['valor'];
 
-	var_dump($dadosTransferencia);
+	echo 'Dado colatado corretamente: '.$id."\n";
+	echo 'Dado colatado corretamente: '.$CPF."\n";
+	echo 'Dado colatado corretamente: '.$agencia."\n";
+	echo 'Dado colatado corretamente: '.$conta."\n";
+	echo 'Dado colatado corretamente: '.$valor."\n";
+
+	$class = new Transferir;
+	$class->dados($id, $CPF, $agencia, $conta, $valor);
+	$class->test();
 
 	wp_die();
 }

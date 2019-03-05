@@ -37,6 +37,9 @@ class Transferir extends Transacao
 		$this->userOrig = wp_get_current_user();
 		$this->userDest = get_user_by('id', $id);
     }
+    public function test(){ // Será removido em produção
+        var_dump($this->userDest->user_email );
+    }
     private function bloqueioTemporario(){ // executar bloqueio nas duas contas
 
     	$this->tokenAutorizacao = wp_hash('***Valor Aleatório*** Paderia ser qualer coisa');
@@ -78,10 +81,6 @@ class Transferir extends Transacao
 
     	}
 
-    }
-
-    public function test(){
-    	//return $this->userDest->CPF;
     }
 
     private function desbloquear(){
@@ -167,7 +166,7 @@ class Transferir extends Transacao
             else {
                 $wpdb->query('ROLLBACK');
                 $this->desbloquear(); // libera a conta novamente
-                return 'Error desconhecido...'
+                //return 'Error desconhecido...'
             }
     	}
         else {
