@@ -44,7 +44,7 @@ class Transferir extends Transacao
     }
     public function test(){ // Será removido em produção
 
-        $this->bloqueioTemporario();
+        $this->exec();
         echo $this->html;
 
         var_dump($this->userOrig->bloqueio != 1 );
@@ -78,10 +78,11 @@ class Transferir extends Transacao
 
 		    	}
 		    	else{
-		    		// envia mensagem informando que a conta está ocupada
+
+
 		    		$this->desbloquear();
 		    		// envia mensagem informando para tentar novamente
-    				return $this->html = 'Ocorreu um erro. Tente mais tarde. Destino';
+    				return $this->html = 'Ocorreu um erro. Tente mais tarde.';
 
 		    	}
     		
@@ -89,7 +90,7 @@ class Transferir extends Transacao
     	}
     	else{ 
     		// envia mensagem informando para tentar novamente
-    		return $this->html = 'Ocorreu um erro. Tente mais tarde. Origem';
+    		return $this->html = 'Ocorreu um erro. Tente mais tarde.';
 
     	}
 
@@ -203,22 +204,26 @@ class Transferir extends Transacao
             // Inicia o método transacional
             $wpdb->query('START TRANSACTION');
 
-            $dadosTransacional = array (
-                'ID' => $this->userOrig->ID, 'saldo' => $debitar, // débito na conta de quem faz a transferência
-                'ID' => $this->userDest->ID, 'saldo' => $creditar // crétido na conta de quem recebe a tranferência
+            // Realiza o débito e crédito nas contas
+            $transDebito = array (
+                'ID' => $this->userOrig->ID, 'saldo' => $debitar
+            );
+            $transCredito = array (
+                'ID' => $this->userDest->ID, 'saldo' => $creditar 
             );
 
-            $resultado = wp_update_user($dadosTransacional);
+            $resultado1 = wp_update_user($transDebito);
+            $resultado2 = wp_update_user($transCredito);
 
-            if ($resultado) {
+            if ($resultado1 && $resultado2) {
                 $wpdb->query('COMMIT');
                 $this->desbloquear(); // libera a conta novamente
-                return 'Sucesso!';
+                $this->html = 'Transferencia realizada com sucesso! '.$debitar;
             }
             else {
                 $wpdb->query('ROLLBACK');
                 $this->desbloquear(); // libera a conta novamente
-                //return 'Error desconhecido...'
+                $this->html = 'Ocorreu um erro. Tente novamente.';
             }
     	}
         else {
