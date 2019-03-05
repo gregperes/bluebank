@@ -50,7 +50,7 @@ class Transferir extends Transacao
     			'ID' => $this->userOrig->ID, 'token_autorizacao' => $this->tokenAutorizacao
     		));
 
-    		return $this->bloqueioContas = true;
+    		$this->bloqueioContas = true;
 
     	}
     	else{ 
@@ -60,7 +60,7 @@ class Transferir extends Transacao
     	}
 
     	// Verifica se a conta de destino está disponível para fazer auterações
-    	if ( $this->contaLiberada === true && $this->userDest !== 0 ){
+    	if ( $this->userDest !== 0 ){
     		
     		wp_update_user( array(
 
@@ -85,19 +85,27 @@ class Transferir extends Transacao
     }
 
     private function desbloquear(){
-    	// muda $user->podeprocessar para 1.
-    	wp_update_user( array(
+    	// Se o bloqueio foi realizado com sucesso, eu libero para novas transações.
+        if ($this->tokenAutorizacao === $this->userOrig->token_autorizacao){
 
-    	// Se tiver diponível muda o status para zero e define o token como Id da transação
-    	'ID' => $this->userOrig->ID, 'bloqueio' => ''
-    	
-    	));
-    	wp_update_user( array(
+            // Se esta condição fosse falsa, impediria uma indevida liberação atrapalhado uma outra transação em curso
+        	wp_update_user( array(
 
-    	// Se tiver diponível muda o status para zero e define o token como Id da transação
-    	'ID' => $this->userDest->ID, 'bloqueio' => ''
-    	
-    	));
+            	// Se tiver diponível muda o status para zero e define o token como Id da transação
+            	'ID' => $this->userOrig->ID, 'bloqueio' => ''
+        	
+        	));
+        }
+        if ($this->tokenAutorizacao === $this->userDest->token_autorizacao){
+
+            // Se esta condição fosse falsa, impediria uma indevida liberação atrapalhado uma outra transação em curso
+        	wp_update_user( array(
+
+            	// Se tiver diponível muda o status para zero e define o token como Id da transação
+            	'ID' => $this->userDest->ID, 'bloqueio' => ''
+        	
+        	));
+        }
     }
 
     private function validaTodosDados(){
@@ -135,7 +143,37 @@ class Transferir extends Transacao
     	if($this->userOrig->token_autorizacao === $this->tokenAutorizacao && $this->userOrig->token_autorizacao === $this->tokenAutorizacao){
 
     		// transação aqui
+            global $wpdb;
+
+            // Valores de débito e crédito
+            $debitar  = (int)$this->userOrig->saldo - (int)$this->valor;
+            $creditar = (int)$this->userDest->saldo + (int)$this->valor;
+
+            // Inicia o método transacional
+            $wpdb->query('START TRANSACTION');
+
+            $dadosTransacional = array (
+                'ID' => $this->userOrig->ID, 'saldo' => $debitar, // débito na conta de quem faz a transferência
+                'ID' => $this->userDest->ID, 'saldo' => $creditar // crétido na conta de quem recebe a tranferência
+            );
+
+            $resultado = wp_update_user($dadosTransacional);
+
+            if ($resultado) {
+                $wpdb->query('COMMIT');
+                $this->desbloquear(); // libera a conta novamente
+                return 'Sucesso!';
+            }
+            else {
+                $wpdb->query('ROLLBACK');
+                $this->desbloquear(); // libera a conta novamente
+                return 'Error desconhecido...'
+            }
     	}
+        else {
+            // Se entrar neste "esle", significa que na hora houve algum conflito no bloqueio temporário
+            // Talvez, alguma outra transação estava sendo feita ao mesmo tempo
+        }
     }
 
     public function exec(){
