@@ -29,6 +29,23 @@ https://codex.wordpress.org/Function_Reference/get_footer
         </div>
     </div>
 <script type="text/javascript" src="/wp-content/themes/bluebank/assets/scripts/main.js"></script>
+<script>
+    function transferir(){
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               console.log(xhttp.responseText);
+            }
+        };
+        // Send a POST to transferir function that load inside functions.php  file
+        // Envia um POST na função transferir que carraga no arquivo functions.php
+        xhttp.open("POST", "/bluebank/wp-admin/admin-ajax.php?action=transferir", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("id=testId&CPF=testCPF");
+    }
+
+</script>
 <?php wp_footer(); /* hook para adicionar coisar no footer sem precisar mexer no codigo fonte */ ?>
 </body>
 </html>
