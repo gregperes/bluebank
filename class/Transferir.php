@@ -218,7 +218,7 @@ class Transferir extends Transacao
             if ($resultado1 && $resultado2) {
                 $wpdb->query('COMMIT');
                 $this->desbloquear(); // libera a conta novamente
-                $this->html = 'Transferencia realizada com sucesso! ';
+                $this->html = '<p class="text-success"><b>Transferencia realizada com sucesso!</b></p>';
 
             }
             else {
