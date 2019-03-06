@@ -1,21 +1,27 @@
 <?php
-
+/*
+Esta classe é chamada sempre que é preciso realizar uma tranferência.
+Todas as validação são feita nela. Cada método está comentado com suas funcionalidades.
+Os nomes dos métodos são bem sugestivos.
+*/
 class Transferir extends Transacao
 {
+    // Dados obrigatórios para realizar a transferência. 
+    // Estes são os mesmos informados no formulário do font-end
 	private $id;
 	private $CPF;
 	private $conta;
 	private $agencia;
 	private $valor;
 
-	// identificação das partes
-	private $userOrig;
-	private $userDest;
+	// identificação das partes: quem transfere e quem recebe o valor
+	private $userOrig; // Orig = Origem
+	private $userDest; // Dest = Destino
 
-	// Para fazer um controle para não executar duas transações diferentes ao mesmo tempo
+	// Para fazer um controle e evitar executar duas transações diferentes ao mesmo tempo
 	// Sem este controle, poderia haver erros graves na contabilidade da conta
 	private $contaLiberada = false; // Padrão falso
-	private $tokenAutorizacao; // será gerado um token
+	private $tokenAutorizacao; // será gerado um token da transação atual
 
 	// Define os status das validações.
 	// Somente se todos forem verdadeiro é realizada a tranfência
@@ -32,6 +38,7 @@ class Transferir extends Transacao
 
     // Os parâmetros a baixo é de uso obrigatório
     // http://php.net/manual/en/language.oop5.abstract.php
+    // Este método abstrai da class Transacao.php
     public function dados($id, $CPF, $conta, $agencia, $valor) {
         $this->id      = $id;
 		$this->CPF     = $CPF;
@@ -42,13 +49,7 @@ class Transferir extends Transacao
 		$this->userOrig = wp_get_current_user();
 		$this->userDest = get_user_by('id', $id);
     }
-    public function test(){ // Será removido em produção
 
-        $this->exec();
-        
-
-        var_dump($this->userOrig->bloqueio != 1 );
-    }
     private function bloqueioTemporario(){ // executar bloqueio nas duas contas
 
     	$this->tokenAutorizacao = uniqid();// Gera um id para a transferência
@@ -57,6 +58,7 @@ class Transferir extends Transacao
     	if ( $this->userOrig->bloqueio != 1 ){
 
     		wp_update_user( array(
+
     			// Se tiver diponível muda o status para 1 (um) e define o token como Id da transação
     			'ID' => $this->userOrig->ID, 'bloqueio' => 1,
     			'ID' => $this->userOrig->ID, 'token_autorizacao' => $this->tokenAutorizacao
@@ -73,14 +75,16 @@ class Transferir extends Transacao
 
 		    		));
 
-		    		// Bloqueia a conta para realizar a transação
+		    		// Informa a class que a conta foi bloqueada
 		    		$this->contaLiberada = true;
 
 		    	}
 		    	else{
 
 
-		    		$this->desbloquear();
+		    		// desbloqueia a conta para não atrapalhar o fluxo de outras transferencias
+                    $this->desbloquear();
+
 		    		// envia mensagem informando para tentar novamente
     				return $this->html = 'Ocorreu um erro. Tente mais tarde.';
 
@@ -204,32 +208,33 @@ class Transferir extends Transacao
             // Inicia o método transacional
             $wpdb->query('START TRANSACTION');
 
-            // Realiza o débito e crédito nas contas
-            $transDebito = array (
+            
+            $transDebito = array ( // Prepara o débito
                 'ID' => $this->userOrig->ID, 'saldo' => $debitar
             );
-            $transCredito = array (
+            $transCredito = array ( // Prepara o crédito
                 'ID' => $this->userDest->ID, 'saldo' => $creditar 
             );
 
-            $resultado1 = wp_update_user($transDebito);
-            $resultado2 = wp_update_user($transCredito);
+            $resultado1 = wp_update_user($transDebito); // Realiza o débito 
+            $resultado2 = wp_update_user($transCredito); // Realiza o crédito
 
-            if ($resultado1 && $resultado2) {
-                $wpdb->query('COMMIT');
-                $this->desbloquear(); // libera a conta novamente
+            if ($resultado1 && $resultado2) { // Teste se deu tudi certo
+                $wpdb->query('COMMIT'); // Confirma se deu tudo certo
+                $this->desbloquear(); // libera a conta para novas transferencias
                 $this->html = '<p class="text-success"><b>Transferencia realizada com sucesso!</b></p>';
 
             }
             else {
-                $wpdb->query('ROLLBACK');
-                $this->desbloquear(); // libera a conta novamente
+                $wpdb->query('ROLLBACK'); // Cancela se deu algo errado
+                $this->desbloquear(); // libera a conta para novas transferências
                 $this->html = 'Ocorreu um erro. Tente novamente.';
             }
     	}
         else {
             // Se entrar neste "esle", significa que na hora houve algum conflito no bloqueio temporário
             // Talvez, alguma outra transação estava sendo feita ao mesmo tempo
+            $this->html = 'Ocorreu um erro. Tente novamente.';
         }
     }
 

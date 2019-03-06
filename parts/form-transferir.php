@@ -1,8 +1,7 @@
 <?php
 /**
-
+Este é o arquivo que exibe o formulário de transferencia
 */
-
 ?>
 
 <div class="col-md-6">

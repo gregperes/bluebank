@@ -6,7 +6,7 @@ Formulário que é exibido na página de condastro.
 <div class="col-md-6">
   <div class="main-card mb-3 card">
     <div class="card-body"><h5 class="card-title">Abertura de conta corrente</h5>
-      <p>Abra sua conta e ganhe 250 de bônus</p>
+      <p>Ao abrir uma conta será creditado um valor de 250 para realização dos testes.</p>
       <form class="">
         <input id="first_name" placeholder="Primeiro nome*" name="first_name" type="text" maxlength="11" class="mb-2 form-control">
         <input id="last_name" placeholder="Sobre nome*" name="last_name" type="text" maxlength="30" class="mb-2 form-control">

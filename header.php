@@ -27,7 +27,7 @@ https://codex.wordpress.org/pt-br:get_header
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
-	<link href="/wp-content/themes/bluebank/main.css" rel="stylesheet">
+	<link href="<?php echo get_template_directory_uri(); ?>/main.css" rel="stylesheet">
 	<?php wp_head(); /* hook para adicionar coisas na tag <head> sem precisar mexer no código fonte */ ?>
     <script>function $$(seletor){return document.querySelector(seletor);}</script>
 </head>

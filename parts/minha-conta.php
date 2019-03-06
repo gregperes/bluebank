@@ -1,8 +1,7 @@
 <?php
 /**
-
+Exibe dos dados da conta.
 */
-
 ?>
 
 <div class="col-md-6">
