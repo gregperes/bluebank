@@ -45,7 +45,7 @@ class Transferir extends Transacao
     public function test(){ // Será removido em produção
 
         $this->exec();
-        echo $this->html;
+        
 
         var_dump($this->userOrig->bloqueio != 1 );
     }
@@ -218,7 +218,8 @@ class Transferir extends Transacao
             if ($resultado1 && $resultado2) {
                 $wpdb->query('COMMIT');
                 $this->desbloquear(); // libera a conta novamente
-                $this->html = 'Transferencia realizada com sucesso! '.$debitar;
+                $this->html = 'Transferencia realizada com sucesso! ';
+
             }
             else {
                 $wpdb->query('ROLLBACK');
@@ -249,9 +250,8 @@ class Transferir extends Transacao
 
 	    	}
     	
-    }
-
-    return $html;
-
+    	}
+    	return $this->html;
 	}
+	
 }

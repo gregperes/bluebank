@@ -8,24 +8,23 @@ function transferir(){
 
 	$dadosTransferencia = filter_input_array(INPUT_POST, $_POST); // Evita caracteres indesejáveis
 
+	// Pegue os dados enviados do formulário
 	$id       = $dadosTransferencia['id'];
 	$CPF      = $dadosTransferencia['CPF'];
 	$agencia  = $dadosTransferencia['agencia'];
 	$conta    = $dadosTransferencia['conta'];
 	$valor    = $dadosTransferencia['valor'];
 
-	echo 'Dado colatado corretamente: '.$id."\n";
-	echo 'Dado colatado corretamente: '.$CPF."\n";
-	echo 'Dado colatado corretamente: '.$agencia."\n";
-	echo 'Dado colatado corretamente: '.$conta."\n";
-	echo 'Dado colatado corretamente: '.$valor."\n";
+	// Cria um objeto para realizar a transferência
+	$transferir = new Transferir;
 
-	$class = new Transferir;
-	$class->dados($id, $CPF, $agencia, $conta, $valor);
-	$class->test();
+	// Define os objeto com os parâmetros obrigatório
+	$transferir->dados($id, $CPF, $agencia, $conta, $valor);
+
+	// Executa o método que realiza a transferência
+	echo $transferir->exec();
 
 	wp_die();
 }
 
 add_action('wp_ajax_transferir', 'transferir');
-add_action('wp_ajax_nopriv_transferir', 'transferir');
