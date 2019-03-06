@@ -13,13 +13,13 @@ function transferir(){
 	$CPF      = $dadosTransferencia['CPF'];
 	$agencia  = $dadosTransferencia['agencia'];
 	$conta    = $dadosTransferencia['conta'];
-	$valor    = $dadosTransferencia['valor'];
+	$valor    = $dadosTransferencia['valor']; 
 
 	// Cria um objeto para realizar a transferência
 	$transferir = new Transferir;
 
 	// Define os objeto com os parâmetros obrigatório
-	$transferir->dados($id, $CPF, $agencia, $conta, $valor);
+	$transferir->dados($id, $CPF, $conta, $agencia, $valor);
 
 	// Executa o método que realiza a transferência
 	echo $transferir->exec();
