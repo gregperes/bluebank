@@ -29,6 +29,7 @@ https://codex.wordpress.org/pt-br:get_header
     -->
 	<link href="/wp-content/themes/bluebank/main.css" rel="stylesheet">
 	<?php wp_head(); /* hook para adicionar coisas na tag <head> sem precisar mexer no código fonte */ ?>
+    <script>function $$(seletor){return document.querySelector(seletor);}</script>
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -67,26 +68,30 @@ https://codex.wordpress.org/pt-br:get_header
                     <div class="header-btn-lg pr-0">
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
+                                <?php if (is_user_logged_in()): ?>
                                 <div class="widget-content-left">
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="/wp-content/themes/bluebank/assets/images/avatars/1.jpg" alt="">
+                                            <img width="42" class="rounded-circle" src="<?php echo get_avatar_url( wp_get_current_user()->ID ) ?>" alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                                            <button type="button" tabindex="0" class="dropdown-item">Minha conta</button>
-                                            <button type="button" tabindex="0" class="dropdown-item">Enviar foto</button>
+                                            <button type="button" tabindex="0" onclick='pagina("minha-conta")' class="dropdown-item">Minha conta</button>
+                                            <button type="button" onclick="out()" tabindex="0" class="dropdown-item">Log Out</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Nome User
+                                        <?php echo wp_get_current_user()->first_name; ?>
                                     </div>
                                     <div class="widget-subheading">
                                         Conta Corrente
                                     </div>
-                                </div> 
+                                </div>
+                                <?php else: ?>
+                                    <button onclick='pagina("form-abrir-conta")' class="mb-2 mr-2 btn btn-primary">Abra uma conta</button>;
+                                <?php endif; ?> 
                             </div>
                         </div>
                     </div>        </div>
