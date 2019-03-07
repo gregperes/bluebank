@@ -1,38 +1,43 @@
-# Blue Bank - Estamos contratando!
 
-
-**Blue Bank** é uma instituição financeira fictícia cujas demandas de desenvolvimento de software têm aumentado muito nos últimos meses. Tentando manter-se sempre atualizada, busca novos desenvolvedores de software que sejam capazes de solucionar problemas de forma eficaz e elegante.
-
-Como candidato, seu objetivo é desenvolver uma aplicação que seja capaz de demonstrar seus conhecimentos em desenvolvimento frontend e backend, ou seja, provar ser um legítimo desenvolvedor Fullstack.
-
-Para isso será necessário criar uma aplicação que possibilite a transferência de fundos entre contas de dois correntistas.
-
-## Informações importantes sobre o negócio
-Um correntista é identificado pelo seu id, CPF, número da conta corrente e código da agência.
-
-As transferências devem ter controle transacional para evitar débitos e créditos inválidos.
-
-A existência da conta de destino deve ser validada, assim como a existência de fundos suficientes para o valor a ser transferido.
 
 ## Requisitos técnicos
-- Interface web ou mobile;
-- Backend .NET Core, Spring Boot, Ruby, Python, PHP ou outra de sua preferência. Adoramos novas tecnologias!;
+- Interface web: em WordPress;
+- Backend construído em PHP;
 - Utilizar OOP;
-- Banco de dados relacional com ORM (Lembre-se que a legislação obriga os bancos a manter dados históricos por anos);
+- Banco de dados relacional: MySQL;
 - Instruções para deploy e execução;
 - Pequeno memorando com justificativa de decisões técnicas.
 
-## Como destacar-se?
-- Aplicar SOLID;
-- Escrever testes unitários com boa cobertura;
-- Arquitetar com SPA + API;
-- Fazer o deploy da aplicação no seu ambiente de nuvem preferido ([IBM Bluemix](https://console.ng.bluemix.net/), AWS, Openshift, Heroku).
-
 
 ## Frameworks são bem vindos!
-Angular, jQuery, Bootstrap, Material, ModuleJS, Sequelize, Spring, Hibernate.
+Bootstrap e WordPress
 
-## Como enviar o código para análise?
-Como se candidatar?
-Efetue um fork do projeto e envie um pedido de pull request.
-Lembre-se que ele será analisado por desenvolvedores, então não economize nos comentários de commit.
+
+## Instalação
+- Os arquivos do projeto só funciona como um tema do WordPress
+- Para visualizar as páginas conforme projetado é preciso instalá-lo
+- Link de instrução da [instalação do WordPress](https://codex.wordpress.org/pt-br:Instalando_o_WordPress_-_Instru%C3%A7%C3%B5es_Detalhadas)
+
+- Após realizar a instalação do WordPress, basta instalar este tema.
+- No link a cima não fala como instalar usando o Docker. Mas, se achar mais fácil
+- Nesse [link](https://hub.docker.com/_/wordpress) tem um docker-compose.yml já com MySQL
+
+- Uma outra maneira ainda mais fácil, é usar a infraestrutura do Docker Hub para realizar testes
+- Basta a acessar o [Docker Hub](https://hub.docker.com/_/wordpress) e clicar em **Try in PWD**
+- Ao clicar neste botão, o WordPress será instalado instantaneamente em sugundos
+
+## Instalação do Tema
+- há várias maneiras de fazer isso. A mais fácil é pelo painel admin do WordPress
+
+#### Pelo painel admin 
+- **para acessar o painel admin***, acesse http://site/wp-admin
+- forneça o login e senha cadastrado na instalação
+- Em Aparência > temas
+- Selecione **adicionar novo**
+- Em seguida: **enviar arquivos**
+- Selecione este projeto (formato .zip)
+- Agora é só clicar em **ativar** logo após o Upload.
+
+#### Se tiver no ambiente de teste do Docker Hub
+- Clone o repositório https://github.com/mrgenesis/bluebank dentro da pasta home/wp-content/themes
+- Em Aparência > temas > ativar o BlueBank
