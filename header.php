@@ -29,7 +29,7 @@ https://codex.wordpress.org/pt-br:get_header
     -->
 	<link href="<?php echo get_template_directory_uri(); ?>/main.css" rel="stylesheet">
 	<?php wp_head(); /* hook para adicionar coisas na tag <head> sem precisar mexer no código fonte */ ?>
-    <script>function $$(seletor){return document.querySelector(seletor);}</script>
+    <script>function $$(seletor){return document.querySelector(seletor);} var logOutUrl = "<?php echo wp_logout_url( get_site_url() ); ?>";</script>
 </head>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">

@@ -113,5 +113,5 @@
     }
 
     var out = function (){        
-        window.location.href = "<?php echo wp_logout_url( get_site_url() ); ?>";
+        window.location.href = logOutUrl;
         }
