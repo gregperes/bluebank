@@ -13,16 +13,24 @@ function transferir(){
 	$CPF      = $dadosTransferencia['CPF'];
 	$agencia  = $dadosTransferencia['agencia'];
 	$conta    = $dadosTransferencia['conta'];
-	$valor    = $dadosTransferencia['valor']; 
+	$valor    = $dadosTransferencia['valor'];
 
-	// Cria um objeto para realizar a transferência
-	$transferir = new Transferir;
+	// Testa a class para ver se a transferencia está sendo feita para o próprio usuário 
+	if (wp_get_current_user()->ID != $id) {
 
-	// Define os objeto com os parâmetros obrigatório
-	$transferir->dados($id, $CPF, $conta, $agencia, $valor);
+		// Cria um objeto para realizar a transferência
+		$transferir = new Transferir;
 
-	// Executa o método que realiza a transferência
-	echo $transferir->exec();
+		// Define os objeto com os parâmetros obrigatório
+		$transferir->dados($id, $CPF, $conta, $agencia, $valor);
+
+		// Executa o método que realiza a transferência
+		echo $transferir->exec();
+		
+	}
+	else{
+		echo '<p class="text-danger">Não é possível transferir falores para a sua própria conta.</p>';
+	}
 
 	wp_die();
 }

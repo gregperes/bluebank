@@ -99,14 +99,11 @@
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) { 
-                console.log(xhttp.responseText);
-               if(xhttp.responseText){
-                $$('#mensagem').innerHTML = '<p class="text-danger">Este usuário não existe.</p>';
-               }
-            }
-            else{
+               
                 $$('#busca').innerHTML = xhttp.responseText;
+                
             }
+            
         };
         // Send a POST to transferir function that load inside functions.php  file
         // Envia um POST na função transferir que carraga no arquivo functions.php
