@@ -129,7 +129,12 @@ class Transferir extends Transacao
     private function validaTodosDados(){
 
     	$this->validarId();
-    	$this->validarCPF();
+
+        // Se o usuário não existir encerrar validações
+        if ( !$this->statusId ) return $this->html; 
+
+    	// Continua validar os outros dados caso o id seja identificado.
+        $this->validarCPF();
     	$this->validarConta();
     	$this->validarAgencia();
     	$this->validarValor();
