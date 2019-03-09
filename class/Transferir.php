@@ -194,7 +194,7 @@ class Transferir extends Transacao
 			return $this->statusValor = true;
 		}
 		else{
-			return $this->html .= '<p>Seu saldo é insuficiente para transferiri este valor. Saldo: '.$this->saldo.'</p>';
+			return $this->html .= '<p>Seu saldo é insuficiente para transferiri este valor. <br>Saldo atual: '.$this->userOrig->saldo.'</p>';
 		}
     }
 
