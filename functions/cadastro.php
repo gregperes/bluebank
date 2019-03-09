@@ -31,6 +31,7 @@ function cadastro() {
     'user_login' => $user_login, 
     'first_name' => $first_name,
     'last_name'  => $last_name,
+    'user_email' => $user_email,
     'CPF'        => $CPF,
     'agencia'    => $agencia,
     'conta'      => $conta,

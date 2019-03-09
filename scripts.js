@@ -89,7 +89,7 @@
         // Envia um POST na função transferir que carraga no arquivo functions.php
         xhttp.open("POST", "/wp-admin/admin-ajax.php?action=cadastro", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("first_name="+first_name+"&last_name="+last_name+"&CPF="+CPF+"&user_email=@"+user_email+"&user_pass="+user_pass);
+        xhttp.send("first_name="+first_name+"&last_name="+last_name+"&CPF="+CPF+"&user_email="+user_email+"&user_pass="+user_pass);
  
     }
 
